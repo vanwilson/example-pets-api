@@ -9,4 +9,12 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     data = JSON.parse(response.body)
     assert_equal ["jwt", "email", "user_id"], data.keys
   end
+
+  test "show" do
+    get "/pets/#{Pet.first.id}.json"
+    assert_response 200
+
+    data = JSON.parse(response.body)
+    assert_equal ["id", "name", "age", "breed", "created_at", "updated_at"], data.keys
+  end
 end
